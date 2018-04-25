@@ -39,6 +39,6 @@ def purchase(x):
 	player.bank = player.bank - x.cost #'module' object has no attribute obj
 	player.addInventory(x)
 
-def sell(obj):
-	player.bank = player.bank + objects.obj.worth
-	player.subInventory(objects.obj)
+def sell(x):
+	player.bank = player.bank + x.worth
+	player.subInventory(x)

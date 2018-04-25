@@ -5,7 +5,7 @@ class player:
 	def __init__ (self, name, bank):
 		self.name = name
 		self.bank = bank
-	def createInventory (self):
+	def createInventory (self): 
 		self.inv = []
 	def addInventory (self, obj):
 		self.inv.append(obj)
@@ -18,20 +18,26 @@ class items:
 		self.name = name
 		self.cost = cost
 
-# specifically plant team, inherits from iteam
-class plant(items):
-	def __init__ (self, name, cost, worth, furtilizerNeeded, health):
+# specifically seed team, inherits from iteam
+class seed(items):
+	def __init__ (self, name, cost, furtilizerNeeded, health):
 		items.__init__(self, name, cost)
-		self.worth = worth
 		self.growth = furtilizerNeeded
 		self.health = health
 
-# field. has plots.
+class plant(items):
+	def __init__ (self, name, cost, worth, seedName):
+		items.__init__(self, name, cost)
+		self.worth = worth
+		self.seedName = seedName
+
+# field. has plots. has methods that create the field, 
+# add a plot to the field, plant a plat in a plot, furtilize the plant, pick the plant
 class field:
 	def __init__ (self, plots):
 		self.plots = plots
 	def createField(self):
-		self.field = []  #make this a dictionary ?? those two lists need to line up
+		self.field = [] 
 		self.furtTracker = []
 		for plots in range(self.plots):
 			self.field.append("empty")
@@ -64,11 +70,26 @@ class field:
 				self.furtTracker.pop(plot)
 				self.furtTracker.insert(plot, x - 1)
 				functions.player.inv.remove(furtilizer)
+	def pick(self, seed, plot):
+		allPlants = [carrotGrown, greenBeanGrown]
+		if self.furtTracker[plot] == 0:
+			self.furtTracker[plot] = "null"
+			self.field[plot] = "empty"
+			for x in allPlants:
+				if x.seedName == seed.name:
+					functions.player.inv.append(x)
+		else:
+			print("plant not grown")
+
 
 
 furtilizer = items("furtilizer", 5)
-carrot = plant("carrot", 1, 7, 1, 50)
-greenBean = plant("green bean", 3, 20, 2, 20)
+carrotSeed = seed("carrot seed", 1, 1, 50)
+greenBeanSeed = seed("green bean seed", 3, 2, 20)
+
+carrotGrown = plant("carrot", 'null', 7, "carrot seed")
+greenBeanGrown = plant("green bean", 'null', 20, "green bean seed")
+
 
 # store = [furtilizer, carrot, greenBean]
 
