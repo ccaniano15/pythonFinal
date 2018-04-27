@@ -14,18 +14,18 @@ def characterSetUp(x):
 def checkInv():
 
 	listCheck = []
-	iteamSort = []
+	itemSort = []
 
 	for x in player.inv:
 		listCheck.append(x.name)
 	
 	for x in listCheck:
-		if x not in iteamSort:
-			iteamSort.append(x)
+		if x not in itemSort:
+			itemSort.append(x)
 
 	invCheck = Counter(listCheck)
 
-	for x in iteamSort:
+	for x in itemSort:
 		print(x + " x" +str(invCheck[x]))
 
 def checkPlantGrowth():

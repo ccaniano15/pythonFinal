@@ -1,4 +1,5 @@
 import functions
+import random
 
 # player object, contains inventory and bank
 class player:
@@ -39,12 +40,15 @@ class field:
 	def createField(self):
 		self.field = [] 
 		self.furtTracker = []
+		self.healthTracker = []
 		for plots in range(self.plots):
 			self.field.append("empty")
 			self.furtTracker.append("null")
+			self.healthTracker.append('null')
 	def addPlot(self):
 		self.field.append("empty")
 		self.furtTracker.append('null')
+		self.healthTracker.append('null')
 	def plant(self, obj):
 		if obj in functions.player.inv:
 			if "empty" in self.field:
@@ -54,6 +58,8 @@ class field:
 				self.field.insert(x, obj.name)
 				self.furtTracker.remove("null")
 				self.furtTracker.insert(x, obj.growth)
+				self.healthTracker.remove("null")
+				self.healthTracker.insert(x, obj.health)
 				functions.player.inv.remove(obj)
 			else:
 				print("no empty plots")
@@ -74,6 +80,7 @@ class field:
 		allPlants = [carrotGrown, greenBeanGrown]
 		if self.furtTracker[plot] == 0:
 			self.furtTracker[plot] = "null"
+			self.healthTracker[plot] = "null"
 			self.field[plot] = "empty"
 			for x in allPlants:
 				if x.seedName == seed.name:
@@ -81,7 +88,23 @@ class field:
 		else:
 			print("plant not grown")
 
+#class the creates weather objects
+class weather:
+	def __init__ (self, name, verb, damage):
+		self.name = name
+		self.verb = verb
+		self.damage = damage
 
+	def randomWeather(self):
+		allWeather = []
+		chosenWeather = random.choice(allWeather)
+		damage = chosenWeather.damage
+		plant = random.choice(field.field)
+		#chose a plant, subtract damage from the plants health
+
+
+
+#dcreating objectsx
 
 furtilizer = items("furtilizer", 5)
 carrotSeed = seed("carrot seed", 1, 1, 50)
