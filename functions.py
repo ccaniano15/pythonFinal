@@ -9,6 +9,7 @@ def characterSetUp(x):
 	player.createInventory()
 	field = objects.field(3)
 	field.createField()
+	print("CHARA CREATED")
 
 # checks and counts how many things you have in your inventory
 def checkInv():
@@ -37,7 +38,10 @@ def checkPlantGrowth():
 # buy and sell items
 def purchase(x):
 	player.bank = player.bank - x.cost #'module' object has no attribute obj
-	player.addInventory(x)
+	if x.name == "plot":
+		field.addPlot()
+	else:
+		player.addInventory(x)
 
 def sell(x):
 	player.bank = player.bank + x.worth

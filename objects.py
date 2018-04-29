@@ -107,13 +107,20 @@ class weather:
 #dcreating objectsx
 
 furtilizer = items("furtilizer", 5)
+plot = items("plot", 20)
 carrotSeed = seed("carrot seed", 1, 1, 50)
 greenBeanSeed = seed("green bean seed", 3, 2, 20)
+onionSeed = seed("onion seed", 3, 2, 50)
+appleSeed = seed("apple seed", 2, 5, 120)
+tomatoSeed = seed("tomato seed", 1, 1, 20)
 
 carrotGrown = plant("carrot", 'null', 7, "carrot seed")
-greenBeanGrown = plant("green bean", 'null', 20, "green bean seed")
+greenBeanGrown = plant("green bean", 'null', 25, "green bean seed")
+onionGrown = plant("onion", 'null', 20, "onion seed" )
+appleGrown = plant("apple tree", 'null', 40, "apple seed")
+tomatoGrown = plant("tomato", 'null', 10, "tomato seed")
 
 
-# store = [furtilizer, carrot, greenBean]
+store = [furtilizer, plot, carrotSeed,greenBeanSeed,onionSeed,appleSeed,tomatoSeed]
 
 
