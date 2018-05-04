@@ -1,7 +1,7 @@
 import functions
 import random
 
-# player object, contains inventory and bank
+# player object, contains inventory and bank. can add and sub items from inv
 class player:
 	def __init__ (self, name, bank):
 		self.name = name
@@ -13,7 +13,7 @@ class player:
 	def subInventory (self, obj):
 		self.inv.remove(obj)
 
-# general iteam object
+# general item object
 class items:
 	def __init__ (self, name, cost):
 		self.name = name
@@ -34,7 +34,7 @@ class plant(items):
 		self.seedName = seedName
 
 # field. has plots. has methods that create the field, 
-# add a plot to the field, plant a plat in a plot, furtilize the plant, pick the plant
+# add a plot to the field, plant a plant in a plot, furtilize the plant, pick the plant
 class field:
 	def __init__ (self, plots):
 		self.plots = plots
@@ -94,23 +94,22 @@ class field:
 		else:
 			print("plant not grown")
 
-#class the creates weather objects
-class weather:
-	def __init__ (self, name, verb, damage):
-		self.name = name
-		self.verb = verb
-		self.damage = damage
+#class the creates weather objects. if time would of allowed, there would have been weather events that randomly occured that harmed the plants
+# class weather:
+# 	def __init__ (self, name, verb, damage):
+# 		self.name = name
+# 		self.verb = verb
+# 		self.damage = damage
 
-	def randomWeather(self):
-		allWeather = []
-		chosenWeather = random.choice(allWeather)
-		damage = chosenWeather.damage
-		plant = random.choice(field.field)
-		#chose a plant, subtract damage from the plants health
+# 	def randomWeather(self):
+# 		allWeather = []
+# 		chosenWeather = random.choice(allWeather)
+# 		damage = chosenWeather.damage
+# 		plant = random.choice(field.field)
+# 		#chose a plant, subtract damage from the plants health
 
 
-
-#dcreating objectsx
+#creating objects
 
 furtilizer = items("Fertilizer", 5)
 plot = items("Plot", 20)
