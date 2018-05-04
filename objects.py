@@ -18,6 +18,7 @@ class items:
 	def __init__ (self, name, cost):
 		self.name = name
 		self.cost = cost
+		self.worth = cost
 
 # specifically seed team, inherits from iteam
 class seed(items):
@@ -42,19 +43,20 @@ class field:
 		self.furtTracker = []
 		self.healthTracker = []
 		for plots in range(self.plots):
-			self.field.append("empty")
+			self.field.append("Empty")
 			self.furtTracker.append("null")
 			self.healthTracker.append('null')
 	def addPlot(self):
-		self.field.append("empty")
+		self.field.append("Empty")
 		self.furtTracker.append('null')
 		self.healthTracker.append('null')
 	def plant(self, obj):
+		global selection
 		if obj in functions.player.inv:
-			if "empty" in self.field:
-				x = self.field.index("empty")
+			if "Empty" in self.field:
+				x = self.field.index("Empty")
 				print(x)
-				self.field.remove("empty")
+				self.field.remove("Empty")
 				self.field.insert(x, obj.name)
 				self.furtTracker.remove("null")
 				self.furtTracker.insert(x, obj.growth)
@@ -65,7 +67,9 @@ class field:
 				print("no empty plots")
 		else:
 			print("no object in inv")
+
 	def furtilize(self, plot):
+		global selection
 		if furtilizer in functions.player.inv:
 			if self.furtTracker[plot] == 0:
 				print("already grown")
@@ -76,15 +80,17 @@ class field:
 				self.furtTracker.pop(plot)
 				self.furtTracker.insert(plot, x - 1)
 				functions.player.inv.remove(furtilizer)
-	def pick(self, seed, plot):
-		allPlants = [carrotGrown, greenBeanGrown]
+
+	def pick(self, plot):
+		global selection
+		allPlants = [carrotGrown, soybeanGrown, onionGrown, appleGrown, tomatoGrown]
 		if self.furtTracker[plot] == 0:
+			for x in allPlants:
+				if x.seedName == self.field[plot]:
+					functions.player.inv.append(x)
 			self.furtTracker[plot] = "null"
 			self.healthTracker[plot] = "null"
-			self.field[plot] = "empty"
-			for x in allPlants:
-				if x.seedName == seed.name:
-					functions.player.inv.append(x)
+			self.field[plot] = "Empty"
 		else:
 			print("plant not grown")
 
@@ -106,21 +112,21 @@ class weather:
 
 #dcreating objectsx
 
-furtilizer = items("furtilizer", 5)
-plot = items("plot", 20)
-carrotSeed = seed("carrot seed", 1, 1, 50)
-greenBeanSeed = seed("green bean seed", 3, 2, 20)
-onionSeed = seed("onion seed", 3, 2, 50)
-appleSeed = seed("apple seed", 2, 5, 120)
-tomatoSeed = seed("tomato seed", 1, 1, 20)
+furtilizer = items("Fertilizer", 5)
+plot = items("Plot", 20)
+carrotSeed = seed("Carrot Seed", 1, 1, 50)
+soybeanSeed = seed("Soybean Seed", 3, 2, 20)
+onionSeed = seed("Onion Seed", 3, 2, 50)
+appleSeed = seed("Apple Seed", 2, 5, 120)
+tomatoSeed = seed("Tomato Seed", 1, 1, 20)
 
-carrotGrown = plant("carrot", 'null', 7, "carrot seed")
-greenBeanGrown = plant("green bean", 'null', 25, "green bean seed")
-onionGrown = plant("onion", 'null', 20, "onion seed" )
+carrotGrown = plant("Carrot", 'null', 7, "Carrot Seed")
+soybeanGrown = plant("Soybean", 'null', 25, "Soybean Seed")
+onionGrown = plant("Onion", 'null', 20, "Onion Seed" )
 appleGrown = plant("apple tree", 'null', 40, "apple seed")
-tomatoGrown = plant("tomato", 'null', 10, "tomato seed")
+tomatoGrown = plant("Tomato", 'null', 10, "Tomato Seed")
 
 
-store = [furtilizer, plot, carrotSeed,greenBeanSeed,onionSeed,appleSeed,tomatoSeed]
+store = [furtilizer, plot, carrotSeed,soybeanSeed,onionSeed,appleSeed,tomatoSeed]
 
 
